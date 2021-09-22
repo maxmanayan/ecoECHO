@@ -8,7 +8,7 @@ An online forum focused on discussing humanity's impact on our environment.
 - Backend: Node and Express
 - Frontend: React
 
-# Includes
+### Includes
 
 - Custom-built authentication using bcrypt and jsonwebtoken
 - GraphQL API design paradigm with Apollo
