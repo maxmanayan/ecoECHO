@@ -1,0 +1,479 @@
+/* 
+Color Scheme:
+- yellow: #f6c453
+- cream: #fefbe9
+- orange: #f0a04b
+- dark green: #183a1d
+- light blue: #e1eedd
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+
+.App {
+  text-align: center;
+  font-family: "Merriweather", serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fefbe9d2;
+  color: #183a1d;
+
+  background-image: url(./assets/forrest.jpg);
+  background-blend-mode: screen;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.link {
+  color: #f0a04b;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #f6c453;
+}
+
+button {
+  cursor: pointer;
+  background-color: #183a1d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  padding: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+  font-family: "Merriweather", serif;
+}
+
+button:hover {
+  background-color: #183a1db6;
+  color: white;
+}
+
+select {
+  font-family: "Merriweather", serif;
+}
+
+.navbar {
+  max-width: 1440px;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1em;
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+.navbar h1 {
+  font-size: 2.5em;
+}
+
+.nav-right,
+.nav-left {
+  margin: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: baseline;
+}
+
+.navbar .home-link,
+.navbar .wall-link,
+.issue-card .issue-link {
+  color: #183a1d;
+  text-decoration: none;
+}
+
+.navbar .home-link:hover,
+.navbar .wall-link:hover,
+.issue-card .issue-link:hover {
+  color: #183a1db6;
+}
+
+.navbar .home-link {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: baseline;
+}
+
+.navbar .wall-link {
+  margin-right: 3em;
+}
+
+nav #no-match {
+  display: flex;
+  flex-direction: column;
+}
+
+#no-match .return-home {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#no-match .link {
+  margin-left: 5px;
+}
+
+.modal-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  max-width: 500px;
+  width: 90vw;
+  border-radius: 10px;
+  padding: 0 2em 2em 2em;
+  background-color: white;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h1 {
+  border-bottom: 3px solid #183a1d;
+}
+
+.modal-close-icon {
+  cursor: pointer;
+}
+
+.modal-close-icon:hover {
+  color: #183a1db6;
+}
+
+.error-message {
+  background-color: rgba(255, 0, 0, 0.253);
+  color: red;
+  border-radius: 10px;
+  padding: 2px;
+  margin: 1em;
+}
+
+.success-message {
+  background-color: rgba(0, 128, 0, 0.274);
+  color: green;
+  border-radius: 10px;
+  padding: 2px;
+  margin: 1em;
+}
+
+#landing-page {
+  max-width: 1200px;
+  width: 100vw;
+  margin-top: 3em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+#landing-page .form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  margin-bottom: 2em;
+}
+
+#landing-page .button-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+#landing-page .logo-container h1 {
+  font-size: 3em;
+}
+
+form .form-row {
+  margin-bottom: 1em;
+}
+
+form input {
+  font-family: "Merriweather", serif;
+  background-color: #e9e7e7;
+  width: 220px;
+  font-size: 1.1em;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+form textarea {
+  font-family: "Merriweather", serif;
+  background-color: #e9e7e7;
+  width: 220px;
+  font-size: 1.1em;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.login-form-container input {
+  margin-top: 1em;
+}
+
+.login-form-container .form-button {
+  margin-top: 3em;
+}
+
+#home {
+  max-width: 1200px;
+  width: 100vw;
+}
+
+#home .empty-state-header {
+  height: 100px;
+}
+
+#home .empty-state-issues-container {
+  height: 60vh;
+}
+
+#wall .page-body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+#wall .issue-form-container {
+  max-width: 500px;
+  width: 90vw;
+  margin-bottom: 2em;
+}
+
+#wall .issue-form-container h1 {
+  font-size: 2.8em;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header .text-icon-container {
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 1.3em;
+}
+
+.add-icon {
+  cursor: pointer;
+}
+
+.add-icon:hover {
+  color: #183a1db6;
+}
+
+.sort-option select {
+  background-color: #e9e7e7;
+  width: 130px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.issues-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.issue-card {
+  background-color: #e1eedd;
+  max-width: 500px;
+  width: 80vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  margin: 1em;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.issue-card .text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.vote-number {
+  font-size: 1.8em;
+}
+
+.vote-icon {
+  cursor: pointer;
+  padding: 1em;
+}
+
+.vote-icon:hover {
+  color: #f0a04b;
+  background-color: #f0a04b28;
+  border-radius: 100%;
+}
+
+#issue-view {
+  max-width: 1200px;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+#issue-view header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 23px;
+}
+
+#issue-view header div {
+  width: 100px;
+}
+
+#issue-view .info-block {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+#issue-view .info-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #e1eeddc7;
+  border-radius: 10px;
+  max-width: 1000px;
+  width: 90vw;
+  min-height: 300px;
+  margin-bottom: 1em;
+}
+
+#issue-view .info-container .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#issue-view .info-container .header h3 {
+  padding: 0 1em;
+}
+
+#issue-view .info-block .vote-number {
+  font-size: 3em;
+  margin: -10px 0;
+}
+
+#issue-view .comment-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  margin-bottom: 3em;
+}
+
+.comment-card {
+  background-color: #e1eedd;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 1000px;
+  min-width: 250px;
+  border-radius: 10px;
+  margin-bottom: 1em;
+}
+
+.comment-card h4 {
+  padding: 0 1em;
+}
+
+#issue-view .comment-form-container {
+  max-width: 1000px;
+
+  margin-bottom: 1em;
+  background-color: #e1eedd;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1em;
+  border-radius: 10px;
+}
+
+#issue-view .comment-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+/* 
+#issue-view .comment-form .form-row,
+#issue-view .comment-form .button-row {
+  height: 100%;
+  background-color: red;
+} */
+#issue-view .comment-form .input-button-container {
+  display: flex;
+  align-items: center;
+}
+
+#issue-view .comment-form input {
+  padding: 1em;
+  margin-left: 10px;
+  background-color: white;
+  width: 60vw;
+  max-width: 800px;
+}
+
+#issue-view .comment-form h4 {
+  padding: 0 1em;
+}
+
+#issue-view .comment-form button {
+  background: none;
+  padding: 0;
+  width: fit-content;
+  color: #183a1d;
+}
