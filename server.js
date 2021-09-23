@@ -43,11 +43,19 @@ startApolloServer();
 app.use(express.json());
 
 // routes
-app.get("/", (req, res, next) => {
-  res.status(200).send("Climate-App");
-});
-
 app.use("/auth", authRouter);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/client/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res, next) => {
+    res.status(200).send("Climate-App");
+  });
+}
 
 // error handlers
 app.use((err, req, res, next) => {
@@ -62,10 +70,6 @@ app.use((err, req, res, next) => {
   console.log(error);
   res.send(error);
 });
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/client/build")));
-}
 
 // exports
 module.exports = app.listen(PORT, () => {
