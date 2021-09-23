@@ -72,6 +72,6 @@ app.use((err, req, res, next) => {
 });
 
 // exports
-module.exports = app.listen(PORT, () => {
+module.exports = app.listen(process.env.PORT || PORT, () => {
   console.log(`Climate-app listening on http://localhost:${PORT}`);
 });
