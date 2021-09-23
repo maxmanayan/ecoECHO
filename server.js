@@ -1,6 +1,7 @@
 // imports
 require("dotenv").config();
 const express = require("express");
+const path = require("path");
 const mongoose = require("mongoose");
 const { ApolloServer } = require("apollo-server-express");
 const authRouter = require("./auth/routes/auth");
@@ -25,7 +26,7 @@ const server = new ApolloServer({
 });
 
 // mongoose middleware
-mongoose.connect(process.env.MONGODB_URL);
+mongoose.connect(process.env.MONGO_URI);
 const db = mongoose.connection;
 db.on("error", (error) => console.log(error));
 db.once("open", () => console.log("MongoDB connected..."));
@@ -42,11 +43,19 @@ startApolloServer();
 app.use(express.json());
 
 // routes
-app.get("/", (req, res, next) => {
-  res.status(200).send("Climate-App");
-});
-
 app.use("/auth", authRouter);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/client/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res, next) => {
+    res.status(200).send("Climate-App");
+  });
+}
 
 // error handlers
 app.use((err, req, res, next) => {
@@ -63,6 +72,6 @@ app.use((err, req, res, next) => {
 });
 
 // exports
-module.exports = app.listen(PORT, () => {
+module.exports = app.listen(process.env.PORT || PORT, () => {
   console.log(`Climate-app listening on http://localhost:${PORT}`);
 });
