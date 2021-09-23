@@ -13,6 +13,10 @@ const resolvers = require("./graphQL/resolvers");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
+  cors: {
+    origin: "*",
+    credentials: true,
+  },
   typeDefs,
   resolvers,
   context: async ({ req }) => {
