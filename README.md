@@ -1,5 +1,7 @@
 # 🌲 ecoECHO 🌲
 
+Create an Account! - [https://ecoecho.herokuapp.com/]
+
 An online forum focused on discussing humanity's impact on our environment 🌎
 
 ### Stack (MERN):
