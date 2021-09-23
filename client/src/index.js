@@ -23,10 +23,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 });
 
-const graphQlServer = from([
-  errorLink,
-  new HttpLink({ uri: "http://localhost:3001/graphql" }),
-]);
+const graphQlServer = from([errorLink, new HttpLink({ uri: "/graphql" })]);
 
 const authToken = localStorage.getItem("authToken");
 
