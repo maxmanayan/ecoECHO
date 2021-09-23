@@ -11,7 +11,7 @@ const resolvers = require("./graphQL/resolvers");
 
 // constants
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -72,6 +72,6 @@ app.use((err, req, res, next) => {
 });
 
 // exports
-module.exports = app.listen(process.env.PORT || PORT, () => {
+module.exports = app.listen(PORT, () => {
   console.log(`Climate-app listening on http://localhost:${PORT}`);
 });
