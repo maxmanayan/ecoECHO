@@ -1,6 +1,7 @@
 // imports
 require("dotenv").config();
 const express = require("express");
+const path = require("path");
 const mongoose = require("mongoose");
 const { ApolloServer } = require("apollo-server-express");
 const authRouter = require("./auth/routes/auth");
@@ -61,6 +62,10 @@ app.use((err, req, res, next) => {
   console.log(error);
   res.send(error);
 });
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/client/build")));
+}
 
 // exports
 module.exports = app.listen(PORT, () => {
