@@ -30,7 +30,11 @@ const server = new ApolloServer({
 });
 
 // mongoose middleware
-mongoose.connect(process.env.MONGO_URI);
+if (process.env.NODE_ENV === "production") {
+  mongoose.connect(process.env.MONGO_URI);
+} else {
+  mongoose.connect(process.env.MONGODB_URL);
+}
 const db = mongoose.connection;
 db.on("error", (error) => console.log(error));
 db.once("open", () => console.log("MongoDB connected..."));
