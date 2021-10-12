@@ -8,7 +8,6 @@ import InfoContainer from "../components/issue/InfoContainer";
 import VoteBlock from "../components/VoteBlock";
 import { GET_ISSUE_BY_ID } from "../graphQL/queries/issueQueries";
 import { AuthContext } from "../providers/AuthProvider";
-import { FaEdit } from "react-icons/fa";
 
 const Issue = () => {
   const { currentUser } = useContext(AuthContext);
@@ -83,7 +82,8 @@ const Issue = () => {
               <header>
                 <BackButton />
                 <h1>Issue</h1>
-                {currentUser._id === issue.user_id ? <FaEdit /> : <div></div>}
+
+                <div></div>
               </header>
               <div className="info-block">
                 <InfoContainer issue={issue} />
