@@ -75,21 +75,25 @@ const IssueForm = (props) => {
     }
   };
 
+  const handleCreate = () => {
+    createIssue({
+      variables: {
+        createIssueTitle: issue.title,
+        createIssueDescription: issue.description,
+        createIssueUserId: issue.user_id,
+        createIssueDateCreated: issue.dateCreated,
+      },
+    });
+    setStatusUpdate({
+      type: "success",
+      message: "Issue posted",
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (noEmptyFields()) {
-      createIssue({
-        variables: {
-          createIssueTitle: issue.title,
-          createIssueDescription: issue.description,
-          createIssueUserId: issue.user_id,
-          createIssueDateCreated: issue.dateCreated,
-        },
-      });
-      setStatusUpdate({
-        type: "success",
-        message: "Issue posted",
-      });
+      presetIssue ? console.log("edit issue") : handleCreate();
       setIssue({
         title: "",
         description: "",
