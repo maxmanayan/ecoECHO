@@ -7,6 +7,7 @@ import CommentCard from "../components/issue/CommentCard";
 import CommentForm from "../components/issue/CommentForm";
 import InfoContainer from "../components/issue/InfoContainer";
 import Modal from "../components/Modal";
+import UpdateMessage from "../components/UpdateMessage";
 import VoteBlock from "../components/VoteBlock";
 import { GET_ISSUE_BY_ID } from "../graphQL/queries/issueQueries";
 import { AuthContext } from "../providers/AuthProvider";
@@ -97,6 +98,12 @@ const Issue = () => {
                 <h1>Issue</h1>
                 <div></div>
               </header>
+              {statusUpdate.message && (
+                <UpdateMessage
+                  type={statusUpdate.type}
+                  message={statusUpdate.message}
+                />
+              )}
               <div className="info-block">
                 <InfoContainer
                   issue={issue}

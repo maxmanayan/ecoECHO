@@ -88,10 +88,24 @@ const IssueForm = (props) => {
       type: "success",
       message: "Issue posted",
     });
+    isModal &&
+      closeModal({
+        type: "success",
+        message: "Issue posted",
+      });
   };
 
   const handleUpdate = () => {
     console.log("edit issue");
+    setStatusUpdate({
+      type: "success",
+      message: "Issue updated",
+    });
+    isModal &&
+      closeModal({
+        type: "success",
+        message: "Issue updated",
+      });
   };
 
   const handleSubmit = (e) => {
@@ -105,11 +119,6 @@ const IssueForm = (props) => {
         dateCreated: new Date(),
       });
       setTimeout(() => setStatusUpdate({ type: "", message: "" }), 3000);
-      isModal &&
-        closeModal({
-          type: "success",
-          message: "Issue posted",
-        });
     }
   };
 
