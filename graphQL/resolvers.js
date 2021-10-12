@@ -266,9 +266,11 @@ const resolvers = {
 
     async updateIssue(parent, args, { authenticated }) {
       if (authenticated) {
+        console.log("in updateIssue", args);
         try {
           let { _id, title, description } = args;
           let res = await Issue.findById(_id);
+          console.log(res);
           if (title && description) {
             res["title"] = title;
             res["description"] = description;

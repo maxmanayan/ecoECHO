@@ -2,7 +2,10 @@ import React, { useContext, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useMutation } from "@apollo/client";
-import { CREATE_ISSUE } from "../../graphQL/mutations/issueMutations";
+import {
+  CREATE_ISSUE,
+  UPDATE_ISSUE,
+} from "../../graphQL/mutations/issueMutations";
 import { GET_ISSUES } from "../../graphQL/queries/issueQueries";
 import { GET_USER } from "../../graphQL/queries/userQueries";
 import UpdateMessage from "../UpdateMessage";
@@ -56,6 +59,8 @@ const IssueForm = (props) => {
     },
   });
 
+  const [updateIssue] = useMutation(UPDATE_ISSUE);
+
   // Validation #1 - verifies there are no empty fields in register form
   const noEmptyFields = () => {
     if (
@@ -96,7 +101,14 @@ const IssueForm = (props) => {
   };
 
   const handleUpdate = () => {
-    console.log("edit issue");
+    console.log("in handle update");
+    updateIssue({
+      variables: {
+        updateIssueId: issue._id,
+        updateIssueTitle: issue.title,
+        updateIssueDescription: issue.description,
+      },
+    });
     setStatusUpdate({
       type: "success",
       message: "Issue updated",
