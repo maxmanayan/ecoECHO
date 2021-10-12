@@ -9,14 +9,18 @@ import UpdateMessage from "../UpdateMessage";
 
 const IssueForm = (props) => {
   const { currentUser } = useContext(AuthContext);
-  const { isModal, closeModal } = props;
+  const { isModal, closeModal, presetIssue } = props;
 
-  const [issue, setIssue] = useState({
-    title: "",
-    description: "",
-    user_id: currentUser._id,
-    dateCreated: new Date(),
-  });
+  const [issue, setIssue] = useState(
+    presetIssue
+      ? presetIssue
+      : {
+          title: "",
+          description: "",
+          user_id: currentUser._id,
+          dateCreated: new Date(),
+        }
+  );
 
   const [statusUpdate, setStatusUpdate] = useState({ type: "", message: "" });
 

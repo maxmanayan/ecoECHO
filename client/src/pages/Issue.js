@@ -117,7 +117,11 @@ const Issue = () => {
           )}
           {showModal === "updateIssue" && (
             <Modal>
-              <IssueForm isModal={true} closeModal={closeModal} />
+              <IssueForm
+                isModal={true}
+                closeModal={closeModal}
+                presetIssue={issue}
+              />
             </Modal>
           )}
         </div>
