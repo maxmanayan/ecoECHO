@@ -109,7 +109,7 @@ const IssueForm = (props) => {
     <>
       {isModal && (
         <div className="modal-header">
-          <h1>Create Issue</h1>
+          <h1>{presetIssue ? "Edit Issue" : "Create Issue"}</h1>
           <AiFillCloseCircle
             size={40}
             className="modal-close-icon"
@@ -145,7 +145,7 @@ const IssueForm = (props) => {
           <p>Created By: {currentUser.username}</p>
         </div>
         <div className="button-row">
-          <button type="submit">Create</button>
+          <button type="submit">{presetIssue ? "Update" : "Create"}</button>
         </div>
       </form>
     </>
