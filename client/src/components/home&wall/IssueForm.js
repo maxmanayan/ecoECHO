@@ -101,7 +101,6 @@ const IssueForm = (props) => {
   };
 
   const handleUpdate = () => {
-    console.log("in handle update");
     updateIssue({
       variables: {
         updateIssueId: issue._id,
