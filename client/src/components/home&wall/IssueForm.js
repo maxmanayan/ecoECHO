@@ -90,10 +90,14 @@ const IssueForm = (props) => {
     });
   };
 
+  const handleUpdate = () => {
+    console.log("edit issue");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (noEmptyFields()) {
-      presetIssue ? console.log("edit issue") : handleCreate();
+      presetIssue ? handleUpdate() : handleCreate();
       setIssue({
         title: "",
         description: "",
