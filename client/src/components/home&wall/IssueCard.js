@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useQuery } from "@apollo/client";
 import { GET_ISSUE_BY_ID } from "../../graphQL/queries/issueQueries";
-import { AiFillEdit } from "react-icons/ai";
 
 const IssueCard = (props) => {
   const { currentUser } = useContext(AuthContext);

@@ -8,6 +8,7 @@ import InfoContainer from "../components/issue/InfoContainer";
 import VoteBlock from "../components/VoteBlock";
 import { GET_ISSUE_BY_ID } from "../graphQL/queries/issueQueries";
 import { AuthContext } from "../providers/AuthProvider";
+import { AiFillEdit } from "react-icons/ai";
 
 const Issue = () => {
   const { currentUser } = useContext(AuthContext);
