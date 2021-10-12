@@ -300,6 +300,14 @@ form textarea {
   color: #183a1db6;
 }
 
+.edit-icon {
+  cursor: pointer;
+}
+
+.edit-icon:hover {
+  color: #183a1db6;
+}
+
 .sort-option select {
   background-color: #e9e7e7;
   width: 130px;
@@ -384,6 +392,7 @@ form textarea {
 #issue-view .info-container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background-color: #e1eeddc7;
   border-radius: 10px;
   max-width: 1000px;
@@ -400,6 +409,13 @@ form textarea {
 
 #issue-view .info-container .header h3 {
   padding: 0 1em;
+}
+
+#issue-view .icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 1em;
 }
 
 #issue-view .info-block .vote-number {

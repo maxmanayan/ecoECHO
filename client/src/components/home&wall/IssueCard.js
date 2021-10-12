@@ -7,7 +7,7 @@ import { GET_ISSUE_BY_ID } from "../../graphQL/queries/issueQueries";
 
 const IssueCard = (props) => {
   const { currentUser } = useContext(AuthContext);
-  const { issue: propsIssue } = props;
+  const { issue: propsIssue, onWall } = props;
 
   const [issue, setIssue] = useState(null);
 

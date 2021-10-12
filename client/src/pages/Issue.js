@@ -2,9 +2,12 @@ import { useQuery } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
+import IssueForm from "../components/home&wall/IssueForm";
 import CommentCard from "../components/issue/CommentCard";
 import CommentForm from "../components/issue/CommentForm";
 import InfoContainer from "../components/issue/InfoContainer";
+import Modal from "../components/Modal";
+import UpdateMessage from "../components/UpdateMessage";
 import VoteBlock from "../components/VoteBlock";
 import { GET_ISSUE_BY_ID } from "../graphQL/queries/issueQueries";
 import { AuthContext } from "../providers/AuthProvider";
@@ -14,6 +17,8 @@ const Issue = () => {
   const { _id } = useParams();
 
   const [issue, setIssue] = useState(null);
+  const [showModal, setShowModal] = useState(null);
+  const [statusUpdate, setStatusUpdate] = useState({ type: "", message: "" });
 
   const { data } = useQuery(GET_ISSUE_BY_ID, {
     variables: { getIssueById: _id },
@@ -72,6 +77,16 @@ const Issue = () => {
     );
   };
 
+  const openUpdateIssueModal = () => {
+    setShowModal("updateIssue");
+  };
+
+  const closeModal = (statusMessage) => {
+    setShowModal(null);
+    statusMessage && setStatusUpdate(statusMessage);
+    setTimeout(() => setStatusUpdate({ type: "", message: "" }), 3000);
+  };
+
   return (
     <>
       {currentUser && (
@@ -83,8 +98,17 @@ const Issue = () => {
                 <h1>Issue</h1>
                 <div></div>
               </header>
+              {statusUpdate.message && (
+                <UpdateMessage
+                  type={statusUpdate.type}
+                  message={statusUpdate.message}
+                />
+              )}
               <div className="info-block">
-                <InfoContainer issue={issue} />
+                <InfoContainer
+                  issue={issue}
+                  openUpdateIssueModal={openUpdateIssueModal}
+                />
                 {renderVoteBlock()}
               </div>
               <div className="comment-container">
@@ -97,6 +121,15 @@ const Issue = () => {
                 )}
               </div>
             </>
+          )}
+          {showModal === "updateIssue" && (
+            <Modal>
+              <IssueForm
+                isModal={true}
+                closeModal={closeModal}
+                presetIssue={issue}
+              />
+            </Modal>
           )}
         </div>
       )}

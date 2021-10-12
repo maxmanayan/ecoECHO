@@ -2,21 +2,28 @@ import React, { useContext, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useMutation } from "@apollo/client";
-import { CREATE_ISSUE } from "../../graphQL/mutations/issueMutations";
+import {
+  CREATE_ISSUE,
+  UPDATE_ISSUE,
+} from "../../graphQL/mutations/issueMutations";
 import { GET_ISSUES } from "../../graphQL/queries/issueQueries";
 import { GET_USER } from "../../graphQL/queries/userQueries";
 import UpdateMessage from "../UpdateMessage";
 
 const IssueForm = (props) => {
   const { currentUser } = useContext(AuthContext);
-  const { isModal, closeModal } = props;
+  const { isModal, closeModal, presetIssue } = props;
 
-  const [issue, setIssue] = useState({
-    title: "",
-    description: "",
-    user_id: currentUser._id,
-    dateCreated: new Date(),
-  });
+  const [issue, setIssue] = useState(
+    presetIssue
+      ? presetIssue
+      : {
+          title: "",
+          description: "",
+          user_id: currentUser._id,
+          dateCreated: new Date(),
+        }
+  );
 
   const [statusUpdate, setStatusUpdate] = useState({ type: "", message: "" });
 
@@ -52,6 +59,8 @@ const IssueForm = (props) => {
     },
   });
 
+  const [updateIssue] = useMutation(UPDATE_ISSUE);
+
   // Validation #1 - verifies there are no empty fields in register form
   const noEmptyFields = () => {
     if (
@@ -71,21 +80,49 @@ const IssueForm = (props) => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (noEmptyFields()) {
-      createIssue({
-        variables: {
-          createIssueTitle: issue.title,
-          createIssueDescription: issue.description,
-          createIssueUserId: issue.user_id,
-          createIssueDateCreated: issue.dateCreated,
-        },
-      });
-      setStatusUpdate({
+  const handleCreate = () => {
+    createIssue({
+      variables: {
+        createIssueTitle: issue.title,
+        createIssueDescription: issue.description,
+        createIssueUserId: issue.user_id,
+        createIssueDateCreated: issue.dateCreated,
+      },
+    });
+    setStatusUpdate({
+      type: "success",
+      message: "Issue posted",
+    });
+    isModal &&
+      closeModal({
         type: "success",
         message: "Issue posted",
       });
+  };
+
+  const handleUpdate = () => {
+    updateIssue({
+      variables: {
+        updateIssueId: issue._id,
+        updateIssueTitle: issue.title,
+        updateIssueDescription: issue.description,
+      },
+    });
+    setStatusUpdate({
+      type: "success",
+      message: "Issue updated",
+    });
+    isModal &&
+      closeModal({
+        type: "success",
+        message: "Issue updated",
+      });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (noEmptyFields()) {
+      presetIssue ? handleUpdate() : handleCreate();
       setIssue({
         title: "",
         description: "",
@@ -93,11 +130,6 @@ const IssueForm = (props) => {
         dateCreated: new Date(),
       });
       setTimeout(() => setStatusUpdate({ type: "", message: "" }), 3000);
-      isModal &&
-        closeModal({
-          type: "success",
-          message: "Issue posted",
-        });
     }
   };
 
@@ -105,7 +137,7 @@ const IssueForm = (props) => {
     <>
       {isModal && (
         <div className="modal-header">
-          <h1>Create Issue</h1>
+          <h1>{presetIssue ? "Edit Issue" : "Create Issue"}</h1>
           <AiFillCloseCircle
             size={40}
             className="modal-close-icon"
@@ -141,7 +173,7 @@ const IssueForm = (props) => {
           <p>Created By: {currentUser.username}</p>
         </div>
         <div className="button-row">
-          <button type="submit">Create</button>
+          <button type="submit">{presetIssue ? "Update" : "Create"}</button>
         </div>
       </form>
     </>

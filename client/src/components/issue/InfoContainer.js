@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { FaEdit } from "react-icons/fa";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const InfoContainer = (props) => {
-  const { issue } = props;
+  const { currentUser } = useContext(AuthContext);
+  const { issue, openUpdateIssueModal } = props;
 
   return (
     <div className="info-container">
@@ -12,6 +15,15 @@ const InfoContainer = (props) => {
       <div className="title-description-container">
         <h1>{issue.title}</h1>
         <h3>{issue.description}</h3>
+      </div>
+      <div className="icon-container">
+        {currentUser._id === issue.user_id && (
+          <FaEdit
+            size={30}
+            className="edit-icon"
+            onClick={openUpdateIssueModal}
+          />
+        )}
       </div>
     </div>
   );
