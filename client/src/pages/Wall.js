@@ -58,7 +58,7 @@ const Wall = () => {
     }
 
     return sortedIssues.map((issue) => {
-      return <IssueCard key={issue._id} issue={issue} />;
+      return <IssueCard key={issue._id} issue={issue} onWall={true} />;
     });
   };
 
