@@ -76,8 +76,8 @@ const Issue = () => {
     );
   };
 
-  const openCreateIssueModal = () => {
-    setShowModal("createIssue");
+  const openUpdateIssueModal = () => {
+    setShowModal("updateIssue");
   };
 
   const closeModal = (statusMessage) => {
@@ -95,13 +95,12 @@ const Issue = () => {
               <header>
                 <BackButton />
                 <h1>Issue</h1>
-
                 <div></div>
               </header>
               <div className="info-block">
                 <InfoContainer
                   issue={issue}
-                  openCreateIssueModal={openCreateIssueModal}
+                  openUpdateIssueModal={openUpdateIssueModal}
                 />
                 {renderVoteBlock()}
               </div>
@@ -116,7 +115,7 @@ const Issue = () => {
               </div>
             </>
           )}
-          {showModal === "createIssue" && (
+          {showModal === "updateIssue" && (
             <Modal>
               <IssueForm isModal={true} closeModal={closeModal} />
             </Modal>

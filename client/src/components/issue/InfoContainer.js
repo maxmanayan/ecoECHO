@@ -4,7 +4,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 const InfoContainer = (props) => {
   const { currentUser } = useContext(AuthContext);
-  const { issue } = props;
+  const { issue, openUpdateIssueModal } = props;
 
   return (
     <div className="info-container">
@@ -18,7 +18,11 @@ const InfoContainer = (props) => {
       </div>
       <div className="icon-container">
         {currentUser._id === issue.user_id && (
-          <FaEdit size={30} className="edit-icon" />
+          <FaEdit
+            size={30}
+            className="edit-icon"
+            onClick={openUpdateIssueModal}
+          />
         )}
       </div>
     </div>
